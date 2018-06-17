@@ -24,12 +24,18 @@ term_array = []
 side = LEFT
 i = 0
 
+jump = computor_input.find('X', 0, computor_input.find('='))
+if jump == -1:
+    i = computor_input.find('=')
+
 # Parsing block -> stores a b and c on both sides in term_array
 while i < len(computor_input):
     sign = -1 if computor_input[i] == '-' else 1
     if (computor_input[i] == '-' or computor_input[i] == '+'):
         i += 1
     if (computor_input[i] == '='):
+        if computor_input.find('X', i) == -1:
+            break
         side = RIGHT
         i += 1
     current_term = Term(sign)
@@ -46,7 +52,7 @@ while i < len(computor_input):
     current_term.set_side(side)
     term_array.append(current_term)
 # for term in term_array:
-    # term.debug()
-    # print("\n\n")
+#     term.debug()
+#     print("\n\n")
 
 process(term_array)

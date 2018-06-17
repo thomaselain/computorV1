@@ -21,22 +21,26 @@ def process(term_array):
 
 	delta = b ** 2 - 4 * (a * c)
 
-	print("\nReduced form is : " + reduce({\
+	reduced = reduce({\
 			"a" : Term(-1 if a < 0 else 1, a, 2),\
 			"b" : Term(-1 if b < 0 else 1, b, 1),\
 			"c" : Term(-1 if c < 0 else 1, c, 0)\
-		}))
+		})
+	print("\nReduced form is : " + reduced)
 
 	if a == 0:
-		if b == 0:
+		if reduced.find('x') == -1:
+			print("\nThis equation is nonsense, you need an X to solve one !")
+			exit()
+		elif b == 0:
 			print("\nOh... no solution, probably because you forgot the 'X' (stopping now)")
 			exit()
-		print("This equation is of degree 1")
+		print("\nThis equation is of degree 1")
 		res_one = -c / (2 * b)
 		print('''One real root
 	X = ''' + str(res_one))
 	else:
-		print("This equation is of degree 2")
+		print("\nThis equation is of degree 2")
 		print("Delta is " + str(delta) + "\n")
 		if delta > 0:
 		    res_one = (-b + (delta ** 0.5)) / (2 * a)
@@ -53,11 +57,9 @@ def process(term_array):
 			i = 0
 
 	# First solution
-			print("This equation is of degree 2")
-			print("Delta is " + str(delta) + "\n")
 			print('Negative --> two complex roots\n')
 
-			sys.stdout.write("     " + (str(-b) + " "  if b != 0 else "") +  "- i√(" + str(-delta) + ")\nZ1 = ")
+			sys.stdout.write("     " + (str(-b) + " "  if b != 0 else "") +  "- iV(" + str(-delta) + ")\nZ1 = ")
 			while i <= fraction_len:
 				sys.stdout.write('-')
 				i += 1
@@ -69,7 +71,7 @@ def process(term_array):
 			print(str(-2 * a) + "\n")
 	# Second solution
 			i = 0
-			sys.stdout.write("     " + (str(-b) + " "  if b != 0 else "") +  "+ i√(" + str(-delta) + ")\nZ2 = ")
+			sys.stdout.write("     " + (str(-b) + " "  if b != 0 else "") +  "+ iV(" + str(-delta) + ")\nZ2 = ")
 			while i <= fraction_len:
 				sys.stdout.write('-')
 				i += 1
