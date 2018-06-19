@@ -30,7 +30,7 @@ def process(Terms):
 	if reduced[2].exists():
 		res += ("" if reduced[2].num >= 0 else "-") + str(abs(reduced[2].num)) + "x^2 "
 	if reduced[1].exists():
-		res += ("" if reduced[2].num == 0 else "+ " if reduced[1].num >= 0 else "- ") + str(abs(reduced[1].num)) + "x "
+		res += ("" if reduced[2].num == 0 else "+ " if reduced[1].num >= 0 else "- ") + str(abs(reduced[1].num)) + "x^1 "
 	if reduced[0].exists():
 		res += ("" if reduced[2].num == 0 and reduced[1].num == 0 else "+ " if reduced[0].num >= 0 else "- ") + str(abs(reduced[0].num)) + " "
 	if not reduced[2].exists() and not reduced[1].exists() and not reduced[0].exists():
