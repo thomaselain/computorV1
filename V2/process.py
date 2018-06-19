@@ -16,8 +16,11 @@ def process(Terms):
 	for term in Terms:
 		if term.side == RIGHT:
 			term.change_side()
-		reduced[int(term.expo)].num += float(term.num)
-
+		if (int(term.expo) <= 2):
+			reduced[int(term.expo)].num += float(term.num)
+		else:
+			print("This program can only handle equations of 2nd degree or lower")
+			exit()
 	# for term in reduced:
 	# 	term.debug()
 
@@ -30,7 +33,8 @@ def process(Terms):
 		res += ("" if reduced[2].num == 0 else "+ " if reduced[1].num >= 0 else "- ") + str(abs(reduced[1].num)) + "x "
 	if reduced[0].exists():
 		res += ("" if reduced[2].num == 0 and reduced[1].num == 0 else "+ " if reduced[0].num >= 0 else "- ") + str(abs(reduced[0].num)) + " "
-
+	if not reduced[2].exists() and not reduced[1].exists() and not reduced[0].exists():
+		res += "0 "
 	sys.stdout.write("Reduced form : ")
 	print(res + "= 0")
 	# End of printing
