@@ -21,11 +21,8 @@ def process(Terms):
 		else:
 			print("This program can only handle equations of 2nd degree or lower")
 			exit()
-	# for term in reduced:
-	# 	term.debug()
 
 	# Printing the reduced form
-
 	res = ""
 	if reduced[2].exists():
 		res += ("" if reduced[2].num >= 0 else "-") + str(abs(reduced[2].num)) + "x^2 "
