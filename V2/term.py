@@ -12,8 +12,10 @@ class Term():
         slash = str(values[NUM]).find('/')
 
         if values[NUM] != '':
+            sign = 1 if str(values[NUM]).count('-') % 2 == 0 else -1
+
             if slash == -1:
-                self.num = float(values[NUM])
+                self.num = float(str(values[NUM]).replace('-', '')) * sign
             else:
                 self.num = float(values[NUM][:slash]) / float(values[NUM][slash + 1:])
             if values[X] == '':
