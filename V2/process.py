@@ -10,8 +10,7 @@ def get_degree(Terms):
 		return 0
 
 def process(Terms):
-	print("\nProcess started\n-----------\n")
-	reduced = [Term([0, "", 0], 0), Term([0, "", 1]), Term([0, "", 2])]
+	reduced = [Term(["", 0, 0]), Term(["", 0, 1]), Term(["", 0, 2])]
 
 	for term in Terms:
 		if term.side == RIGHT:
@@ -32,7 +31,7 @@ def process(Terms):
 		res += ("" if reduced[2].num == 0 and reduced[1].num == 0 else "+ " if reduced[0].num >= 0 else "- ") + str(abs(reduced[0].num)) + " "
 	if not reduced[2].exists() and not reduced[1].exists() and not reduced[0].exists():
 		res += "0 "
-	sys.stdout.write("Reduced form : ")
+	sys.stdout.write("\nReduced form : ")
 	print(res + "= 0")
 	# End of printing
 	

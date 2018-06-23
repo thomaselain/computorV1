@@ -1,10 +1,9 @@
 LEFT  =  1
 RIGHT = -1
 # indexes for values[]
-NUM    =  0
-X      =  1
-X_SIGN =  2
-EXP    =  3
+SIGN   =  0
+NUM    =  1
+EXP    =  2
 import re
 
 class Term():
@@ -12,26 +11,26 @@ class Term():
         slash = str(values[NUM]).find('/')
 
         if values[NUM] != '':
-            sign = 1 if str(values[NUM]).count('-') % 2 == 0 else -1
+            sign = 1 if str(values[SIGN]).count('-') % 2 == 0 else -1
 
             if slash == -1:
                 self.num = float(str(values[NUM]).replace('-', '')) * sign
             else:
                 self.num = float(values[NUM][:slash]) / float(values[NUM][slash + 1:])
-            if values[X] == '':
-                self.expo = 0
-            elif values[X].lower()[values[X].find('*') + 1:] == 'x':
-                self.expo = 1
-            else:
-                self.expo = int(values[X][values[X].find('^') + 1:])
-        else:
-            self.num = 1 if values[X_SIGN].count('-') % 2 == 0 else -1
             if values[EXP] == '':
                 self.expo = 0
-            elif values[EXP].lower() == 'x':
+            elif str(values[EXP]).lower() == 'x':
                 self.expo = 1
-            else:
-                self.expo = int(values[EXP][values[EXP].find('^') + 1:])
+            elif str(values[EXP]).find('^') != -1:
+                self.expo = int(values[EXP][str(values[EXP]).find('^') + 1:])
+        else:
+            self.num = 1 if str(values[SIGN]).count('-') % 2 == 0 else -1
+            if values[EXP] == '':
+                self.expo = 0
+            elif str(values[EXP]).lower() == 'x':
+                self.expo = 1
+            elif str(values[EXP]).find('^') != -1:
+                self.expo = int(values[EXP][str(values[EXP]).find('^') + 1:])
 
         self.side = side
 

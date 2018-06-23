@@ -14,7 +14,7 @@ arg = "".join(sys.argv[1].split())
 # Ca, mec, c'est beau (tres beau) (et satrouv un coef avec d truc de ouf genre des / ou des - ou des . ou tout a la fois (c fou))
 # [0-9]+(?:[\.][+-]?[0-9]+)?(?:\/[-+]?[0-9]+(?:[\.][0-9]+)?)?
 
-regex = re.compile('([+-]*[0-9\.]+\/*[0-9\.]*)(?:\*?([Xx](?:\^([0-9]+))?))?')
+regex = re.compile('([+-]*)([0-9]*)(\*?[xX]\^[0-2]|[xX])?')
 is_valid = re.compile('^([+-]*(?:[0-9]+(?:[\.][0-9]+)?(?:\/[0-9]+(?:[\.][0-9]+)?)?\*?[xX]\^[0-9]+|[0-9]+\*?[xX]|[xX]|[0-9]+))+=([+-]*(?:[0-9]+\*?[xX]\^[0-9]+|[0-9]+\*?[xX]|[xX]|[0-9]+))+$')
 
 errors_search()
@@ -28,13 +28,10 @@ right = regex.findall(arg[arg.find('='):])
 Terms = list()
 
 for current in left:
-	print(left)
-	Terms.append(Term(current, LEFT))
+	if current[0] or current[1] or current[2]:
+		Terms.append(Term(current, LEFT))
 for current in right:
-	print(right)
-	Terms.append(Term(current, RIGHT))
-
-for term in Terms:
-	term.debug()
-
+	if current[0] or current[1] or current[2]:
+		Terms.append(Term(current, RIGHT))
+		
 process(Terms)
