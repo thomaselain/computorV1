@@ -13,7 +13,7 @@ arg = "".join(sys.argv[1].split())
 
 # Ca, mec, c'est beau (tres beau) (et satrouv un coef avec d truc de ouf genre des / ou des - ou des . ou tout a la fois (c fou))
 # [0-9]+(?:[\.][+-]?[0-9]+)?(?:\/[-+]?[0-9]+(?:[\.][0-9]+)?)?
-one_term_regex = "([+-]*)([0-9]*)(\*?[xX]\^[0-2]|[xX])?"
+one_term_regex = "(?:([-+]+)?(\d+(?:\.\d+)?(?:\/[+-]*\d+(?:\.\d+)?)?)(\*?[xX](?:\^[0-2])?)?)|(?:([+-]+)?([xX](?:\^[0-2])?))"
 regex = re.compile(one_term_regex)
 is_valid = re.compile('^(' + one_term_regex + ")+=(" + one_term_regex + ")+$")
 
