@@ -61,11 +61,21 @@ def process(Terms):
 
 	# Printing the reduced form
 	res = ""
+	first = True
 	if reduced[2].exists():
+		if first == True and reduced[2].num < 0:
+			res+="-"
+			first = False
 		res += ("" if reduced[2].num >= 0 else "-") + str(abs(reduced[2].num)) + "x^2 "
 	if reduced[1].exists():
+		if first == True and reduced[1].num < 0:
+			res+="-"
+			first = False
 		res += ("" if reduced[2].num == 0 else "+ " if reduced[1].num >= 0 else "- ") + str(abs(reduced[1].num)) + "x^1 "
 	if reduced[0].exists():
+		if first == True and reduced[0].num < 0:
+			res+="-"
+			first = False
 		res += ("" if reduced[2].num == 0 and reduced[1].num == 0 else "+ " if reduced[0].num >= 0 else "- ") + str(abs(reduced[0].num)) + " "
 	if not reduced[2].exists() and not reduced[1].exists() and not reduced[0].exists():
 		res += "0 "

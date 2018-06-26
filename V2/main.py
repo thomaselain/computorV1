@@ -20,7 +20,7 @@ else:
 # Ca, mec, c'est beau (tres beau) (et satrouv un coef avec d truc de ouf genre des / ou des - ou des . ou tout a la fois (c fou))
 # [0-9]+(?:[\.][+-]?[0-9]+)?(?:\/[-+]?[0-9]+(?:[\.][0-9]+)?)?
 
-one_term_regex = r"(?:([-+]+)?(\d+(?:\.\d+)?(?:\/[+-]*\d+(?:\.\d+)?)?)(\*?[xX](?:\^[0-2])?)?)|(?:([+-]+)?([xX](?:\^[0-2])?))"
+one_term_regex = r"(?:([-+]*\d+(?:\.\d+)?(?:\/[+-]*\d+(?:\.\d+)?)?)(\*?[xX](?:\^[0-2])?)?)|(?:([+-]*[xX](?:\^[0-2])?))"
 regex = re.compile(one_term_regex)
 is_valid = re.compile('^(' + one_term_regex + ")+=(" + one_term_regex + ")+$")
 
@@ -33,8 +33,10 @@ right = regex.findall(arg[arg.find('='):])
 Terms = list()
 
 for current in left:
+	print(current)
 	Terms.append(Term(current, LEFT))
 for current in right:
+	print(current)
 	Terms.append(Term(current, RIGHT))
 		
 process(Terms)

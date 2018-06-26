@@ -16,7 +16,7 @@ class Term():
             if slash == -1:
                 self.num = float(str(values[NUM]).replace('-', '')) * sign
             else:
-                self.num = float(values[NUM][:slash]) / float(values[NUM][slash + 1:])
+                self.num = float(values[NUM][:slash]) * sign / float(values[NUM][slash + 1:])
             if values[EXP] == '':
                 self.expo = 0
             elif str(values[EXP]).lower() == 'x':
