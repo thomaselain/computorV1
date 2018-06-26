@@ -10,7 +10,7 @@ def get_degree(Terms):
 		return 0
 
 def print_complex(Terms, delta):
-	if not (len(sys.argv) == 3 and sys.argv[2] == "-f"):
+	if not (len(sys.argv) == 3 and sys.argv[1] == "-f"):
 		sys.stdout.write("\n\tz1 = ")
 		if round(Terms[1].num / (2 * Terms[2].num), 3) != 0:
 			sys.stdout.write(str(round(Terms[1].num / (2 * Terms[2].num), 3)))

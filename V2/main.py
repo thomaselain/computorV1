@@ -1,11 +1,17 @@
 #!/usr/bin/python3
 from term import Term, LEFT, RIGHT
-from error import errors_search
 from process import process
 import sys
 import re
 
-arg = "".join(sys.argv[1].split()) 
+if len(sys.argv) == 3:
+	if sys.argv[1] == "-f":
+		arg = "".join(sys.argv[2].split())
+	else:
+		print("invalid parameter\nUsage : ./computorV1 [-f] \"equation\"")
+		exit()
+else:
+	arg = "".join(sys.argv[1].split()) 
 
 
 # Problemes :
@@ -17,8 +23,6 @@ arg = "".join(sys.argv[1].split())
 one_term_regex = r"(?:([-+]+)?(\d+(?:\.\d+)?(?:\/[+-]*\d+(?:\.\d+)?)?)(\*?[xX](?:\^[0-2])?)?)|(?:([+-]+)?([xX](?:\^[0-2])?))"
 regex = re.compile(one_term_regex)
 is_valid = re.compile('^(' + one_term_regex + ")+=(" + one_term_regex + ")+$")
-
-errors_search()
 
 if len(is_valid.findall(arg)) == 0:
 	print("ntm c pa bon")
