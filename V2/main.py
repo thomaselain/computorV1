@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from term import Term, LEFT, RIGHT
 from error import errors_search
 from process import process
@@ -6,14 +7,14 @@ import re
 
 arg = "".join(sys.argv[1].split()) 
 
-# Problemes :
-# 	- (term) Ca marche pas et ca comprend ca commme 0 * (terme)
-#	Ca oublie certains signes au début des affichages de la forme réduite
 
+# Problemes :
+#	Ca oublie certains signes au debut des affichages de la forme reduite
 
 # Ca, mec, c'est beau (tres beau) (et satrouv un coef avec d truc de ouf genre des / ou des - ou des . ou tout a la fois (c fou))
 # [0-9]+(?:[\.][+-]?[0-9]+)?(?:\/[-+]?[0-9]+(?:[\.][0-9]+)?)?
-one_term_regex = "(?:([-+]+)?(\d+(?:\.\d+)?(?:\/[+-]*\d+(?:\.\d+)?)?)(\*?[xX](?:\^[0-2])?)?)|(?:([+-]+)?([xX](?:\^[0-2])?))"
+
+one_term_regex = r"(?:([-+]+)?(\d+(?:\.\d+)?(?:\/[+-]*\d+(?:\.\d+)?)?)(\*?[xX](?:\^[0-2])?)?)|(?:([+-]+)?([xX](?:\^[0-2])?))"
 regex = re.compile(one_term_regex)
 is_valid = re.compile('^(' + one_term_regex + ")+=(" + one_term_regex + ")+$")
 
@@ -28,10 +29,8 @@ right = regex.findall(arg[arg.find('='):])
 Terms = list()
 
 for current in left:
-	if current[0] or current[1] or current[2]:
-		Terms.append(Term(current, LEFT))
+	Terms.append(Term(current, LEFT))
 for current in right:
-	if current[0] or current[1] or current[2]:
-		Terms.append(Term(current, RIGHT))
+	Terms.append(Term(current, RIGHT))
 		
 process(Terms)

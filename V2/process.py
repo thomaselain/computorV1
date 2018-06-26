@@ -9,6 +9,44 @@ def get_degree(Terms):
 	else:
 		return 0
 
+def print_complex(Terms, delta):
+	if not (len(sys.argv) == 3 and sys.argv[2] == "-f"):
+		sys.stdout.write("\n\tz1 = ")
+		if round(Terms[1].num / (2 * Terms[2].num), 3) != 0:
+			sys.stdout.write(str(round(Terms[1].num / (2 * Terms[2].num), 3)))
+		sys.stdout.write((" + " if (abs(delta) / (2 * Terms[2].num) > 0) else " - ") + str(round(abs(delta) / (2 * Terms[2].num),3)) + "i\n" )
+		sys.stdout.write("\n\tz2 = ")
+		if round(Terms[1].num / (2 * Terms[2].num), 3) != 0:
+			sys.stdout.write(str(round(Terms[1].num / (2 * Terms[2].num), 3)))
+		sys.stdout.write((" + " if (-abs(delta) / (2 * Terms[2].num) > 0) else " - ") + str(round(abs(delta) / (2 * Terms[2].num),3)) + "i\n" )
+		return
+	up_z1 = (str(Terms[1].num) + " +" if Terms[1].num != 0 else "") + " i * sqrt(" + str(abs(delta)) + ")"
+	up_z2 = (str(Terms[1].num) if Terms[1].num != 0 else "") + " - i * sqrt(" + str(abs(delta)) + ")"
+	if (2 * Terms[2].num == 1): # on n'affiche le trait du milieu que si le denominateur (a) = 1
+		print("\nz1 = " + up_z1 + "\n\nz2 = " + up_z2)
+		return
+	else:
+		print("\n")
+		print_soluce(Terms, up_z1, 1)
+		print("\n")
+		print_soluce(Terms, up_z2, 2)
+
+def print_soluce(Terms, up, z):
+	x=0
+	sys.stdout.write("\t" + up + "\nz" + str(z) + " =\t")
+	while x < len(up):
+		sys.stdout.write("-")
+		x+=1
+	sys.stdout.write("\n\t")
+	x=0
+	while x < len(up) / 2 - len(str(2*Terms[2].num)) / 2:
+		sys.stdout.write(" ")
+		x+=1
+	print(str(2 * Terms[2].num))
+
+
+
+
 def process(Terms):
 	reduced = [Term(["", 0, 0]), Term(["", 0, 1]), Term(["", 0, 2])]
 
@@ -56,4 +94,5 @@ def process(Terms):
 			print("Delta = " + str(delta) + ", so there is one real root :")
 			print("\tx = " + str(-reduced[1].num / (2 * reduced[2].num)))
 		elif delta < 0:
-			print("Delta = " + str(delta) + ", wich is < 0, so there are two imaginary roots :")
+			print("Delta = " + str(delta) + ", wich is < 0, so there are two complex roots :")
+			print_complex(reduced, delta)
